@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Number Guessing Game</title>
+</head>
+<body>
+
+<h1>113304015_Lab3_Number Guessing Game</h1>
+<div id="result"></div>
+
+<script>
+	
+	const targetNum = Math.floor(Math.random()*100) + 1;
+
+	let guessedCorrectly = false;
+	let lowNum = 0;
+	let highNum = 100;
+	let attemptsLeft = 7;
+
+	while(attemptsLeft > 0 && !guessedCorrectly){
+		const guessNum = window.prompt("guess a number between " + lowNum + " and " + highNum + "\nAttempts Left: " + attemptsLeft);
+
+		if(!guessNum || isNaN(guessNum)){
+			alert("Please enter valid number!");
+			continue;
+		}
+
+		const guess = parseInt(guessNum, 10);
+
+		if (guess < lowNum || guess > highNum) {
+            alert("Please enter a number between " + lowNum + " and " + highNum);
+            continue;
+        }
+
+		attemptsLeft --;
+
+		if (guess == targetNum){
+			alert("Correct!");
+			document.getElementById("result").innerHTML = '<img src="correct.jpg" alt="Correct">';
+            guessedCorrectly = true;
+		}
+		else if (guess < targetNum){
+			alert("The numer is too low!");
+			lowNum = guess;
+		}
+		else if (guess > targetNum){
+			alert("The number is too high!");
+			highNum	= guess;
+		}
+	}
+
+	if (!guessedCorrectly) {
+        alert("Bad luck! The answer is " + targetNum);
+        document.getElementById("result").innerHTML = '<img src="wrong.jpg" alt="Wrong">';
+    }
+
+</script>
+
+</body>
+</html>
